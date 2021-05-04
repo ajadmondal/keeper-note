@@ -1,0 +1,57 @@
+.new-note{
+    width: 45vw;
+    height: 100px;
+    background-color: rgb(255, 255, 255);
+    border-radius: 10px;
+    margin-top: 30px;
+    margin-bottom: 50px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: flex-start;
+    padding:30px;
+    position: relative;
+    position: sticky;
+    top: 30px;
+    font-family:  'Roboto';
+    transition: all 0.3s ease;
+    &:focus-within{
+        height: 300px;
+    }
+    // overflow: scroll;
+}
+.new-note__title{
+    font-family:  'Ubuntu';
+    width: 80%;
+    margin: 0;
+    margin-bottom: 10px;
+    font-size: larger;
+    border: none;
+}
+.new-note__description{
+    font-family:  'Ubuntu';
+    width: 100%;
+    height: 100%;
+    font-size: large;
+    border: none;
+}
+.new-note__title:focus,.new-note__description:focus{
+    outline: none;
+}
+.add-btn{
+    margin: 0;
+    padding: 0;
+    background: none;
+    border: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color:#f7b83c ;
+    font-size: 50px;
+    position: absolute;
+    bottom: -15px;
+    right: 30px;
+    &:hover{
+        cursor: pointer;
+    }
+}
