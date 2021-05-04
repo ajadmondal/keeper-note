@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react';
+import React, {useState} from 'react';
 import './styles/NewNote.css';
 import { RiAddCircleFill } from "react-icons/ri";
 
@@ -30,8 +30,6 @@ function NewNote() {
             setDescription(e.target.value);
           }}
           placeholder="Description"
-          // cols="55"
-          // rows="4"
           style={{ resize: "none" }}
         ></textarea>
         <button type="submit" className="add-btn"><RiAddCircleFill/></button>

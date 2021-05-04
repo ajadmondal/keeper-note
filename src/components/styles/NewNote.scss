@@ -55,3 +55,13 @@
         cursor: pointer;
     }
 }
+@media (max-width: 1000px) {
+    .new-note{
+        width: 50vw;
+    }
+}
+@media (max-width: 650px) {
+    .new-note{
+        width: 60vw;
+    }
+}
