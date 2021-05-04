@@ -1,0 +1,49 @@
+.note-container {
+  min-width: 300px;
+  width: 400px;
+  background-color: white;
+  margin: 30px;
+  padding: 10px;
+  border-radius: 10px;
+  position: relative;
+}
+
+.note-title {
+  margin: 20px;
+  text-align: start;
+}
+
+.note-description {
+  margin: 10px 20px;
+  text-align: justify;
+}
+
+.edit-btn, .delete-btn {
+  margin: 0;
+  padding: 0;
+  background: none;
+  border: none;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  color: #082d63;
+  font-size: 30px;
+  position: absolute;
+  bottom: -10px;
+  right: 30px;
+}
+
+.edit-btn:hover, .delete-btn:hover {
+  cursor: pointer;
+}
+
+.edit-btn {
+  right: 90px;
+}
+/*# sourceMappingURL=Note.css.map */
