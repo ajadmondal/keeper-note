@@ -1,5 +1,5 @@
 .header {
-  width: 100vw;
+  width: 100%;
   height: 60px;
   background-color: #f7b83c;
   display: -webkit-box;
@@ -58,7 +58,7 @@
 }
 
 .header__content .brand .brand__icon {
-  width: 1.75rem;
+  width: 1.5rem;
   margin-right: 5px;
 }
 
