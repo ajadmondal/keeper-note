@@ -1,13 +1,15 @@
 import React from 'react';
 import './styles/Header.css';
-import { SiGreenkeeper } from "react-icons/si";
+import "../keeperIcon.png";
+// import { SiGreenkeeper } from "react-icons/si";
 
 function Header() {
     return (
       <div className="header">
         <div className="header__content">
           <h2 className="brand">
-            <SiGreenkeeper className="brand__icon"/>
+            <img className="brand__icon" src="keeperIcon.png" alt=""/>
+            {/* <SiGreenkeeper className="brand__icon"/> */}
             Keeper
           </h2>
           <div className="user">

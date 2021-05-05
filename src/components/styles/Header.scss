@@ -5,6 +5,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    box-shadow: 0px 5px 30px rgb(255, 255, 255);
 }
 .header__content{
     display: flex;
@@ -16,7 +17,7 @@
         // text-align: center;
         display: flex;
         flex-direction: column;
-        justify-content: start;
+        justify-content: flex-start;
         align-items: flex-start;
     }
     .brand{
@@ -24,8 +25,9 @@
         justify-content: center;
         align-items: center;
         .brand__icon{
+            width: 6%;
             margin-right: 5px;
-            color: rgb(49, 19, 19);
+            // color: rgb(49, 19, 19);
         }
     }
 }
