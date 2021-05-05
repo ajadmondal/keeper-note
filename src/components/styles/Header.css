@@ -29,6 +29,7 @@
 }
 
 .header__content .user {
+  min-width: 170px;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -48,16 +49,16 @@
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
-  -webkit-box-pack: center;
-      -ms-flex-pack: center;
-          justify-content: center;
+  -webkit-box-pack: start;
+      -ms-flex-pack: start;
+          justify-content: flex-start;
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
 }
 
 .header__content .brand .brand__icon {
-  width: 6%;
+  width: 1.75rem;
   margin-right: 5px;
 }
 
@@ -69,5 +70,17 @@
 .log__info {
   margin: 0;
   font-weight: 500;
+}
+
+@media (max-width: 1000px) {
+  .header__content {
+    width: 80%;
+  }
+}
+
+@media (max-width: 450px) {
+  .header__content {
+    width: 90%;
+  }
 }
 /*# sourceMappingURL=Header.css.map */

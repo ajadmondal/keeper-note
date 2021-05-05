@@ -1,6 +1,7 @@
 body {
+  padding: 0;
   margin: 0;
-  width: 100vw;
+  width: 100%;
   background-color: #ffd69783;
   /* background-color: #f0d9aa; */
   background-image: url("https://www.transparenttextures.com/patterns/axiom-pattern.png");

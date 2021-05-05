@@ -15,6 +15,7 @@
     // margin: auto 20%;
     .user{
         // text-align: center;
+        min-width: 170px;
         display: flex;
         flex-direction: column;
         justify-content: flex-start;
@@ -22,10 +23,10 @@
     }
     .brand{
         display: flex;
-        justify-content: center;
+        justify-content: flex-start;
         align-items: center;
         .brand__icon{
-            width: 6%;
+            width: 1.75rem;
             margin-right: 5px;
             // color: rgb(49, 19, 19);
         }
@@ -40,4 +41,14 @@
     margin: 0;
     font-weight: 500;
     // padding: 0;
+}
+@media (max-width: 1000px) {
+    .header__content{
+        width: 80%;
+    }
+}
+@media (max-width: 450px) {
+    .header__content{
+        width: 90%;
+    }
 }
