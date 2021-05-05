@@ -26,6 +26,8 @@
   font-family: 'Roboto';
   -webkit-transition: all 0.3s ease;
   transition: all 0.3s ease;
+  -webkit-box-shadow: 0px 5px 30px #929292;
+          box-shadow: 0px 5px 30px #929292;
   z-index: 5;
 }
 
