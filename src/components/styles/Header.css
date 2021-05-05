@@ -68,8 +68,31 @@
 }
 
 .log__info {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
   margin: 0;
   font-weight: 500;
+}
+
+.log__info .log__icon {
+  margin-left: 5px;
+  -webkit-transition: all 0.5s ease;
+  transition: all 0.5s ease;
+}
+
+.log__info:hover {
+  cursor: pointer;
+}
+
+.log__info:hover .log__icon {
+  margin-left: 15px;
 }
 
 @media (max-width: 1000px) {

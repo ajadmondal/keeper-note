@@ -38,8 +38,24 @@
     // padding: 0;
 }
 .log__info{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
     margin: 0;
     font-weight: 500;
+    
+    .log__icon{
+        margin-left: 5px;
+        transition: all 0.5s ease;
+        
+    }
+    &:hover{
+        .log__icon{
+            margin-left: 15px;
+        }
+        cursor: pointer;
+    }
+    
     // padding: 0;
 }
 @media (max-width: 1000px) {
