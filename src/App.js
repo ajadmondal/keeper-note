@@ -16,8 +16,12 @@ function App() {
         setUser(authUser);
       } else {
         setUser(null);
+        
       }
     });
+  }, [user]);
+  useEffect(() => {
+    user ? fetchNotes() : setNotes([]);
   }, [user]);
 
   //update notes to db---------------------------------
@@ -29,14 +33,21 @@ function App() {
     } else {
       db.collection("users")
         .doc(user?.uid)
-        .collection(noteId)
-        .doc("note")
+        .collection("notes")
+        .doc(noteId)
         .set({
+          noteId:noteId,
           title: title,
-          description: description,
+          description: description
         })
         .then(() => {
           console.log("Document successfully updated!");
+          const Note = {
+            noteId: noteId,
+            title: title,
+            description: description
+          };
+          setNotes([Note, ...notes]);
           setTitle("");
           setDescription("");
         })
@@ -45,7 +56,26 @@ function App() {
           console.error("Error updating document: ", error);
         });
     }
-    
+  }
+  // Fetching notes from db---------------------------------------
+  const fetchNotes = () => {
+    db.collection("users")
+      .doc(user?.uid)
+      .collection("notes")
+      .get()
+      .then((querySnapshot) => {
+        const newNotes = [];
+        querySnapshot.forEach((doc) => {
+          const data = doc.data();
+          // data.basket = JSON.parse(data.basket);
+          newNotes.push(data);
+        });
+        setNotes(newNotes);
+        console.log(notes);
+      })
+      .catch((error) => {
+        console.log("Error getting document:", error);
+      });
   }
   return (
     <div className="App">
@@ -56,63 +86,17 @@ function App() {
           description={description}
           setTitle={setTitle}
           setDescription={setDescription}
-          updateNoteToDB={updateNoteToDB} />
+          updateNoteToDB={updateNoteToDB}
+        />
 
         <div className="notes">
-          <Note
-            title="what to do"
-            description="Lorem Ipsum is simply dummy text of the printing and typesetting
-          industry. Lorem Ipsum has been the industry's standard dummy text ever
-          since the 1500s,"
-          />
-          <Note
-            title="what to do"
-            description="Lorem Ipsum is simply dummy text of the printing and typesetting
-          industry. Lorem Ipsum has been the industry's standard dummy text ever
-          since the 1500s,"
-          />
-          <Note
-            title="what to do"
-            description="Lorem Ipsum is simply dummy text of the printing and typesetting
-          industry. Lorem Ipsum has been the industry's standard dummy text ever
-          since the 1500s,"
-          />
-          <Note
-            title="what to do"
-            description="Lorem Ipsum is simply dummy text of the printing and typesetting
-          industry. Lorem Ipsum has been the industry's standard dummy text ever
-          since the 1500s,"
-          />
-          <Note
-            title="what to do"
-            description="Lorem Ipsum is simply dummy text of the printing and typesetting
-          industry. Lorem Ipsum has been the industry's standard dummy text ever
-          since the 1500s,"
-          />
-          <Note
-            title="what to do"
-            description="Lorem Ipsum is simply dummy text of the printing and typesetting
-          industry. Lorem Ipsum has been the industry's standard dummy text ever
-          since the 1500s,"
-          />
-          <Note
-            title="what to do"
-            description="Lorem Ipsum is simply dummy text of the printing and typesetting
-          industry. Lorem Ipsum has been the industry's standard dummy text ever
-          since the 1500s,"
-          />
-          <Note
-            title="what to do"
-            description="Lorem Ipsum is simply dummy text of the printing and typesetting
-          industry. Lorem Ipsum has been the industry's standard dummy text ever
-          since the 1500s,"
-          />
-          <Note
-            title="what to do"
-            description="Lorem Ipsum is simply dummy text of the printing and typesetting
-          industry. Lorem Ipsum has been the industry's standard dummy text ever
-          since the 1500s,"
-          />
+          {notes.map((note) => (
+            <Note
+              noteId={note.noteId}
+              title={note.title}
+              description={note.description}
+            />
+          ))}
         </div>
       </div>
     </div>
