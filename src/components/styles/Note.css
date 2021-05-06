@@ -1,6 +1,8 @@
 .note-container {
-  min-width: 300px;
-  width: 400px;
+  min-width: 350px;
+  -ms-grid-column-align: center;
+      justify-self: center;
+  max-width: 400px;
   background-color: white;
   margin: 30px;
   padding: 10px;
