@@ -7,6 +7,8 @@ import './App.css';
 
 function App() {
   const [user, setUser] = useState();
+  const [title, setTitle] = useState("");
+  const [description, setDescription] = useState("");
   const [notes, setNotes] = useState([]);
   useEffect(() => {
     auth.onAuthStateChanged((authUser) => {
@@ -17,14 +19,44 @@ function App() {
       }
     });
   }, [user]);
+
+  //update notes to db---------------------------------
+  const updateNoteToDB = (noteId, title, description) => {
+    if (title === "") {
+      alert("Note title cannot be empty.");
+    } else if (description === "") {
+      alert("Note description cannot be empty.");
+    } else {
+      db.collection("users")
+        .doc(user?.uid)
+        .collection(noteId)
+        .doc("note")
+        .set({
+          title: title,
+          description: description,
+        })
+        .then(() => {
+          console.log("Document successfully updated!");
+          setTitle("");
+          setDescription("");
+        })
+        .catch((error) => {
+          // The document probably doesn't exist.
+          console.error("Error updating document: ", error);
+        });
+    }
+    
+  }
   return (
     <div className="App">
-      <Header
-        user={user}
-        setUser = {setUser}
-      />
+      <Header user={user} setUser={setUser} />
       <div className="body">
-        <NewNote />
+        <NewNote
+          title={title}
+          description={description}
+          setTitle={setTitle}
+          setDescription={setDescription}
+          updateNoteToDB={updateNoteToDB} />
 
         <div className="notes">
           <Note
