@@ -31,30 +31,39 @@ function App() {
     } else if (description === "") {
       alert("Note description cannot be empty.");
     } else {
-      db.collection("users")
-        .doc(user?.uid)
-        .collection("notes")
-        .doc(noteId)
-        .set({
-          noteId:noteId,
-          title: title,
-          description: description
-        })
-        .then(() => {
-          console.log("Document successfully updated!");
-          const Note = {
+      const Note = {
+        noteId: noteId,
+        title: title,
+        description: description,
+      };
+      if (!user) {
+        alert("Please Log In with google to Save your notes.");
+        setNotes([Note, ...notes]);
+        setTitle("");
+        setDescription("");
+      } else {
+        db.collection("users")
+          .doc(user.uid)
+          .collection("notes")
+          .doc(noteId)
+          .set({
             noteId: noteId,
             title: title,
-            description: description
-          };
-          setNotes([Note, ...notes]);
-          setTitle("");
-          setDescription("");
-        })
-        .catch((error) => {
-          // The document probably doesn't exist.
-          console.error("Error updating document: ", error);
-        });
+            description: description,
+          })
+          .then(() => {
+            // console.log("Document successfully updated!");
+
+            setNotes([Note, ...notes]);
+            setTitle("");
+            setDescription("");
+          })
+          .catch((error) => {
+            // The document probably doesn't exist.
+            console.error("Error updating document: ", error);
+          });
+      }
+      
     }
   }
   // Fetching notes from db---------------------------------------
@@ -71,10 +80,10 @@ function App() {
           newNotes.push(data);
         });
         setNotes(newNotes);
-        console.log(notes);
+        // console.log(notes);
       })
       .catch((error) => {
-        console.log("Error getting document:", error);
+        alert("Error getting document:", error, "Please Refresh the page.");
       });
   }
   return (
