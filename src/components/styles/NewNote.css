@@ -28,7 +28,7 @@
   transition: all 0.3s ease;
   -webkit-box-shadow: 0px 5px 30px #929292;
           box-shadow: 0px 5px 30px #929292;
-  z-index: 5;
+  z-index: 2;
 }
 
 .new-note:focus-within {
