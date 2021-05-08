@@ -73,14 +73,35 @@
   .content {
     width: 80%;
   }
+  .content .note-description {
+    width: 85%;
+  }
+  .content .remove {
+    display: block;
+  }
 }
 
 @media (max-width: 600px) {
   .content {
     width: 90%;
   }
-  .content .remove {
-    display: block;
+}
+
+@media (max-width: 480px) {
+  .content {
+    width: 90%;
+  }
+  .content .note-description {
+    width: 80%;
+  }
+}
+
+@media (max-width: 395px) {
+  .content {
+    width: 90%;
+  }
+  .content .note-description {
+    width: 75%;
   }
 }
 /*# sourceMappingURL=ZoomModal.css.map */

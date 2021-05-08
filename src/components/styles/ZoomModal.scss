@@ -57,13 +57,33 @@
 @media (max-width: 840px) {
     .content{
         width: 80%;
+        .note-description{
+            width: 85%;
+        }
+        .remove{
+            display: block;
+        }
     }
 }
 @media (max-width: 600px) {
     .content{
         width: 90%;
-        .remove{
-            display: block;
+        
+    }
+}
+@media (max-width: 480px) {
+    .content{
+        width: 90%;
+        .note-description{
+            width: 80%;
+        }
+    }
+}
+@media (max-width: 395px) {
+    .content{
+        width: 90%;
+        .note-description{
+            width: 75%;
         }
     }
 }

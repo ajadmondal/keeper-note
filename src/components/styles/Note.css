@@ -78,4 +78,10 @@
 .edit-btn {
   right: 90px;
 }
+
+@media (max-width: 840px) {
+  .zoom-btn {
+    display: block;
+  }
+}
 /*# sourceMappingURL=Note.css.map */
