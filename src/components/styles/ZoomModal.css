@@ -69,21 +69,30 @@
   z-index: 3;
 }
 
-@media (max-width: 840px) {
+@media (max-width: 1080px) {
   .content {
     width: 80%;
   }
   .content .note-description {
-    width: 85%;
+    width: 90%;
   }
   .content .remove {
     display: block;
   }
 }
 
-@media (max-width: 600px) {
+@media (max-width: 950px) {
+  .content .note-description {
+    width: 85%;
+  }
+}
+
+@media (max-width: 680px) {
   .content {
     width: 90%;
+  }
+  .content .note-description {
+    width: 80%;
   }
 }
 
