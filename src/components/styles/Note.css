@@ -2,6 +2,7 @@
   min-width: 320px;
   -ms-grid-column-align: center;
       justify-self: center;
+  max-height: 400px;
   max-width: 400px;
   background-color: white;
   margin: 30px;
@@ -17,14 +18,35 @@
           box-shadow: 0px 5px 30px #bebdbd;
 }
 
+.note-container:hover .zoom-btn {
+  display: block;
+}
+
 .note-title {
   margin: 20px;
+  max-height: 50px;
+  overflow: hidden;
   text-align: start;
 }
 
 .note-description {
   margin: 10px 20px;
+  max-height: 73%;
   text-align: justify;
+  overflow: hidden;
+}
+
+.zoom-btn {
+  color: #07070854;
+  font-size: 25px;
+  position: absolute;
+  top: 25px;
+  right: 30px;
+  display: none;
+}
+
+.zoom-btn:hover {
+  cursor: pointer;
 }
 
 .edit-btn, .delete-btn {
