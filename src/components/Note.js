@@ -2,6 +2,7 @@ import React, {useState} from 'react';
 import { RiQuillPenFill } from "react-icons/ri";
 import { MdDelete, MdZoomOutMap } from "react-icons/md";
 import ZoomModal from "./ZoomModal";
+import EditModal from "./EditModal";
 import "./styles/Note.css";
 function Note(props) {
   const [zoom, setZoom] = useState(false);
@@ -12,10 +13,9 @@ function Note(props) {
         <p className="note-description">{props.description}</p>
         <MdZoomOutMap
           className="zoom-btn"
-          onClick={()=>{
-            setZoom(prev => !prev);
+          onClick={() => {
+            setZoom((prev) => !prev);
           }}
-        
         />
         <RiQuillPenFill
           className="edit-btn"
@@ -35,6 +35,13 @@ function Note(props) {
           description={props.description}
           zoom={zoom}
           setZoom={setZoom}
+        />
+        <EditModal
+          noteId={props.noteId}
+          title={props.title}
+          description={props.description}
+          edit={edit}
+          setEdit={setEdit}
         />
         {/* <button
           
