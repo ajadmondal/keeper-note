@@ -1,4 +1,4 @@
-import React,{useState} from "react";
+import React from "react";
 import ReactDOM from "react-dom";
 import { ImCross } from "react-icons/im";
 import { MdLibraryAdd } from "react-icons/md";
@@ -6,9 +6,12 @@ import "./styles/ZoomModal.css";
 import "./styles/NewNote.css";
 
 function EditModal(props) {
-    const [title, setTitle] = useState(props.title);
-    const [description, setDescription] = useState(props.description);
+  const title = props.title;
+    const description = props.description;
   const close = () => {
+    props.updateNoteToDB(props.noteId, title, description);
+    props.setTitle(title);
+    props.setDescription(description);
     props.setEdit(!props.edit);
   };
   if (!props.edit) return null;
@@ -22,7 +25,7 @@ function EditModal(props) {
           type="text"
           value={title}
           onChange={(e) => {
-            setTitle(e.target.value);
+            props.setTitle(e.target.value);
           }}
           placeholder="Title"
         />
@@ -31,7 +34,7 @@ function EditModal(props) {
           name="Description"
           value={description}
           onChange={(e) => {
-            setDescription(e.target.value);
+            props.setDescription(e.target.value);
           }}
           placeholder="Description"
           style={{ resize: "none" }}

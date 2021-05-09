@@ -7,10 +7,12 @@ import "./styles/Note.css";
 function Note(props) {
   const [zoom, setZoom] = useState(false);
   const [edit, setEdit] = useState(false);
+  const [title, setTitle] = useState(props.title);
+  const [description, setDescription] = useState(props.description);
     return (
       <div className="note-container">
-        <h3 className="note-title">{props.title}</h3>
-        <p className="note-description">{props.description}</p>
+        <h3 className="note-title">{title}</h3>
+        <p className="note-description">{description}</p>
         <MdZoomOutMap
           className="zoom-btn"
           onClick={() => {
@@ -31,17 +33,20 @@ function Note(props) {
         />
         <ZoomModal
           noteId={props.noteId}
-          title={props.title}
-          description={props.description}
+          title={title}
+          description={description}
           zoom={zoom}
           setZoom={setZoom}
         />
         <EditModal
           noteId={props.noteId}
-          title={props.title}
-          description={props.description}
+          title={title}
+          description={description}
           edit={edit}
+          setTitle={setTitle}
+          setDescription={setDescription}
           setEdit={setEdit}
+          updateNoteToDB={props.updateNoteToDB}
         />
         {/* <button
           
