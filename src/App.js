@@ -31,16 +31,10 @@ function App() {
     } else if (description === "") {
       alert("Note description cannot be empty.");
     } else {
-      const Note = {
-        noteId: noteId,
-        title: title,
-        description: description,
-      };
+      
       if (!user) {
         alert("Please Log In with google to Save your notes.");
-        setNotes([Note, ...notes]);
-        setTitle("");
-        setDescription("");
+        
       } else {
         db.collection("users")
           .doc(user.uid)
@@ -52,11 +46,11 @@ function App() {
             description: description,
           })
           .then(() => {
-            // console.log("Document successfully updated!");
+            console.log("Document successfully updated!");
 
-            setNotes([Note, ...notes]);
-            setTitle("");
-            setDescription("");
+            // setNotes([Note, ...notes]);
+            // setTitle("");
+            // setDescription("");
           })
           .catch((error) => {
             // The document probably doesn't exist.
@@ -93,8 +87,10 @@ function App() {
         <NewNote
           title={title}
           description={description}
+          notes={notes}
           setTitle={setTitle}
           setDescription={setDescription}
+          setNotes={setNotes}
           updateNoteToDB={updateNoteToDB}
         />
 
@@ -104,6 +100,7 @@ function App() {
               noteId={note.noteId}
               title={note.title}
               description={note.description}
+              updateNoteToDB={updateNoteToDB}
             />
           ))}
         </div>
