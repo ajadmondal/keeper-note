@@ -3,10 +3,12 @@ import { RiQuillPenFill } from "react-icons/ri";
 import { MdDelete, MdZoomOutMap } from "react-icons/md";
 import ZoomModal from "./ZoomModal";
 import EditModal from "./EditModal";
+import RemoveModal from "./RemoveModal";
 import "./styles/Note.css";
 function Note(props) {
   const [zoom, setZoom] = useState(false);
   const [edit, setEdit] = useState(false);
+  const [remove, setRemove] = useState(false);
   const [title, setTitle] = useState(props.title);
   const [description, setDescription] = useState(props.description);
     return (
@@ -28,7 +30,7 @@ function Note(props) {
         <MdDelete
           className="delete-btn"
           onClick={() => {
-            console.log("delete");
+            setRemove(!remove);
           }}
         />
         <ZoomModal
@@ -47,6 +49,12 @@ function Note(props) {
           setDescription={setDescription}
           setEdit={setEdit}
           updateNoteToDB={props.updateNoteToDB}
+        />
+        <RemoveModal
+          noteId={props.noteId}
+          remove={remove}
+          setRemove={setRemove}
+          delteNoteFromDB={props.delteNoteFromDB}
         />
         {/* <button
           
