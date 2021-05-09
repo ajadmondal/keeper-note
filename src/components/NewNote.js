@@ -3,13 +3,21 @@ import './styles/NewNote.css';
 import { v4 as uuid } from "uuid";
 import { RiAddCircleFill } from "react-icons/ri";
 
-function NewNote({title, description, setTitle, setDescription, updateNoteToDB }) {
+function NewNote({title, description, notes, setTitle, setDescription, setNotes, updateNoteToDB }) {
   
   
   const addNewPost = (e) => {
     e.preventDefault();
     const noteId = uuid();
     updateNoteToDB(noteId, title, description);
+    const Note = {
+      noteId: noteId,
+      title: title,
+      description: description,
+    };
+    setNotes([Note, ...notes]);
+    setTitle("");
+    setDescription("");
     // console.log(noteId, title, description);
     // setTitle("");
     // setDescription("");
