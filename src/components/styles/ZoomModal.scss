@@ -29,7 +29,7 @@
         text-align: justify;
         overflow-y: scroll;
     }
-    .remove{
+    .remove, .save{
         color:#07070836 ;
         font-size: 20px;
         position: absolute;
@@ -39,6 +39,14 @@
         &:hover{
             cursor: pointer;
         }
+    }
+    .save{
+        display: block;
+        color:#082d63 ;
+        font-size: 40px;
+        top:unset;
+        bottom: -20px;
+        // right: 50px;
     }
     &:hover{
         .remove{

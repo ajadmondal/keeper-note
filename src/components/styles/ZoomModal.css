@@ -43,7 +43,7 @@
   overflow-y: scroll;
 }
 
-.content .remove {
+.content .remove, .content .save {
   color: #07070836;
   font-size: 20px;
   position: absolute;
@@ -52,8 +52,16 @@
   display: none;
 }
 
-.content .remove:hover {
+.content .remove:hover, .content .save:hover {
   cursor: pointer;
+}
+
+.content .save {
+  display: block;
+  color: #082d63;
+  font-size: 40px;
+  top: unset;
+  bottom: -20px;
 }
 
 .content:hover .remove {

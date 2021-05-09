@@ -1,6 +1,7 @@
 import React,{useState} from "react";
 import ReactDOM from "react-dom";
 import { ImCross } from "react-icons/im";
+import { MdLibraryAdd } from "react-icons/md";
 import "./styles/ZoomModal.css";
 import "./styles/NewNote.css";
 
@@ -36,6 +37,7 @@ function EditModal(props) {
           style={{ resize: "none" }}
         ></textarea>
         <ImCross className="remove" onClick={close} />
+        <MdLibraryAdd className="save" onClick={close} />
       </div>
     </div>,
     document.getElementById("portal")
