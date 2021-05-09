@@ -28,4 +28,4 @@ function ZoomModal(props) {
     );
 }
 
-        export default ZoomModal
+export default ZoomModal;
