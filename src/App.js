@@ -4,62 +4,40 @@ import NewNote from "./components/NewNote";
 import Note from "./components/Note";
 import { auth, db } from './firebase';
 import './App.css';
+import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+import { useHistory } from "react-router-dom";
+import { v4 as uuid } from 'uuidv4';
 
 function App() {
   const [user, setUser] = useState();
-  const [title, setTitle] = useState("");
-  const [description, setDescription] = useState("");
   const [notes, setNotes] = useState([]);
-  useEffect(() => {
-    auth.onAuthStateChanged((authUser) => {
-      if (authUser) {
-        setUser(authUser);
-      } else {
-        setUser(null);
-        
-      }
-    });
-  }, [user]);
-  useEffect(() => {
-    user ? fetchNotes() : setNotes([]);
-  }, [user]);
+
+  const history = useHistory();
 
   //update notes to db---------------------------------
   const updateNoteToDB = (noteId, title, description) => {
-    if (title === "") {
-      alert("Note title cannot be empty.");
-    } else if (description === "") {
-      alert("Note description cannot be empty.");
+    if (!user) {
+      alert("Please Log In with google to Save your notes.");
     } else {
-      
-      if (!user) {
-        alert("Please Log In with google to Save your notes.");
-        
-      } else {
-        db.collection("users")
-          .doc(user.uid)
-          .collection("notes")
-          .doc(noteId)
-          .set({
-            noteId: noteId,
-            title: title,
-            description: description,
-          })
-          .then(() => {
-            console.log("Document successfully updated!");
-
-            // setNotes([Note, ...notes]);
-            // setTitle("");
-            // setDescription("");
-          })
-          .catch((error) => {
-            // The document probably doesn't exist.
-            console.error("Error updating document: ", error);
-          });
-      }
-      
+      db.collection("users")
+        .doc(user.uid)
+        .collection("notes")
+        .doc(noteId)
+        .set({
+          noteId: noteId,
+          title: title,
+          description: description,
+        })
+        .then(() => {
+          console.log("Document successfully updated!");
+        })
+        .catch((error) => {
+          // The document probably doesn't exist.
+          console.error("Error updating document: ", error);
+        });
     }
-  }
+  };
+
   // Fetching notes from db---------------------------------------
   const fetchNotes = () => {
     db.collection("users")
@@ -79,24 +57,34 @@ function App() {
       .catch((error) => {
         alert("Error getting document:", error, "Please Refresh the page.");
       });
-  }
+  };
+
+// Handling user authentication---------------------------------------
+  useEffect(() => {
+    auth.onAuthStateChanged((authUser) => {
+      if (authUser) {
+        setUser(authUser);
+      } else {
+        setUser(null);
+      }
+    });
+  }, [user]);
+  
+// Reloding notes when user changes ----------------------------------
+  useEffect(() => {
+    user ? fetchNotes() : setNotes([]);
+  }, [user]);
+
   return (
     <div className="App">
       <Header user={user} setUser={setUser} />
       <div className="body">
-        <NewNote
-          title={title}
-          description={description}
-          notes={notes}
-          setTitle={setTitle}
-          setDescription={setDescription}
-          setNotes={setNotes}
-          updateNoteToDB={updateNoteToDB}
-        />
+        <NewNote setNotes={setNotes} updateNoteToDB={updateNoteToDB} />
 
         <div className="notes">
           {notes.map((note) => (
             <Note
+              key={note.noteId}
               noteId={note.noteId}
               title={note.title}
               description={note.description}

@@ -1,26 +1,42 @@
-import React from 'react';
+import React, {useState} from 'react';
 import './styles/NewNote.css';
 import { v4 as uuid } from "uuid";
 import { RiAddCircleFill } from "react-icons/ri";
 
-function NewNote({title, description, notes, setTitle, setDescription, setNotes, updateNoteToDB }) {
-  
-  
+
+function NewNote({setNotes, updateNoteToDB }) {
+  const [title, setTitle] = useState("");
+  const [description, setDescription] = useState("");
+  // updating notes -------------------------
+  const updateNotes = (noteId, title, description) => {
+    if (title === "") {
+      alert("Note title cannot be empty.");
+    } else if (description === "") {
+      alert("Note description cannot be empty.");
+    } else {
+      const newPost = {
+        noteId: noteId,
+        title: title,
+        description: description,
+      };
+      setNotes((prev) => {
+        const prevNotes = [...prev];
+        prevNotes.push(newPost);
+        return prevNotes;
+      });
+      updateNoteToDB(noteId, title, description);
+      
+      setTitle("");
+      setDescription("");
+      
+      
+    }
+  };
   const addNewPost = (e) => {
     e.preventDefault();
     const noteId = uuid();
-    updateNoteToDB(noteId, title, description);
-    const Note = {
-      noteId: noteId,
-      title: title,
-      description: description,
-    };
-    setNotes([Note, ...notes]);
-    setTitle("");
-    setDescription("");
+    updateNotes(noteId, title, description);
     // console.log(noteId, title, description);
-    // setTitle("");
-    // setDescription("");
   };
   return (
     <form className="new-note" onSubmit={addNewPost}>
@@ -50,4 +66,4 @@ function NewNote({title, description, notes, setTitle, setDescription, setNotes,
   );
 }
 
-export default NewNote
+export default NewNote;
