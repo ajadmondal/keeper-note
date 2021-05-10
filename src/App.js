@@ -4,15 +4,10 @@ import NewNote from "./components/NewNote";
 import Note from "./components/Note";
 import { auth, db } from './firebase';
 import './App.css';
-import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
-import { useHistory } from "react-router-dom";
-import { v4 as uuid } from 'uuidv4';
 
 function App() {
   const [user, setUser] = useState();
   const [notes, setNotes] = useState([]);
-
-  const history = useHistory();
 
   //update notes to db---------------------------------
   const updateNoteToDB = (noteId, title, description) => {
@@ -59,6 +54,28 @@ function App() {
       });
   };
 
+  // Deleting notes from list --------------------------------------
+  const delteNoteFromDB = (noteId) => {
+    const newNotes = notes.filter(note => note.noteId !== noteId);
+    setNotes(newNotes);
+    if (!user) {
+      alert("Please Log In with google to Save and Delete your notes.");
+    } else {
+      db.collection("users")
+        .doc(user.uid)
+        .collection("notes")
+        .doc(noteId)
+        .delete()
+        .then(() => {
+          console.log("Document successfully deleted!");
+        })
+        .catch((error) => {
+          // The document probably doesn't exist.
+          console.error("Error Deleting document: ", error);
+        });
+    }
+  }
+
 // Handling user authentication---------------------------------------
   useEffect(() => {
     auth.onAuthStateChanged((authUser) => {
@@ -69,7 +86,7 @@ function App() {
       }
     });
   }, [user]);
-  
+
 // Reloding notes when user changes ----------------------------------
   useEffect(() => {
     user ? fetchNotes() : setNotes([]);
@@ -88,7 +105,9 @@ function App() {
               noteId={note.noteId}
               title={note.title}
               description={note.description}
+              setNotes={setNotes}
               updateNoteToDB={updateNoteToDB}
+              delteNoteFromDB={delteNoteFromDB}
             />
           ))}
         </div>
