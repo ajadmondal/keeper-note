@@ -9,8 +9,35 @@ function Note(props) {
   const [zoom, setZoom] = useState(false);
   const [edit, setEdit] = useState(false);
   const [remove, setRemove] = useState(false);
+
   const [title, setTitle] = useState(props.title);
   const [description, setDescription] = useState(props.description);
+
+  // updating the edited note----------------------------------------
+  const editNote = () => {
+    if (title === "") {
+      alert("Note title cannot be empty.");
+    } else if (description === "") {
+      alert("Note description cannot be empty.");
+    } else {
+
+      props.setNotes((prev) => {
+        const prevNotes = [...prev];
+        for (let i = 0; i < prevNotes.length; i++){
+          if (prevNotes[i].noteId === props.noteId) {
+            prevNotes[i].title = title;
+            prevNotes[i].description = description;
+            break;
+          }
+        }
+        // prevNotes.push(newPost);
+        return prevNotes;
+      });
+      props.updateNoteToDB(props.noteId, title, description);
+      setEdit(!edit);
+    }
+  }
+
     return (
       <div className="note-container">
         <h3 className="note-title">{title}</h3>
@@ -41,14 +68,12 @@ function Note(props) {
           setZoom={setZoom}
         />
         <EditModal
-          noteId={props.noteId}
           title={title}
           description={description}
           edit={edit}
           setTitle={setTitle}
           setDescription={setDescription}
-          setEdit={setEdit}
-          updateNoteToDB={props.updateNoteToDB}
+          editNote={editNote}
         />
         <RemoveModal
           noteId={props.noteId}
