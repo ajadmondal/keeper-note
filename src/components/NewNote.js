@@ -7,8 +7,11 @@ import { RiAddCircleFill } from "react-icons/ri";
 function NewNote({setNotes, updateNoteToDB }) {
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
-  // updating notes -------------------------
-  const updateNotes = (noteId, title, description) => {
+
+  // adding new note -------------------------
+  const addNewPost = (e) => {
+    e.preventDefault();
+    const noteId = uuid();
     if (title === "") {
       alert("Note title cannot be empty.");
     } else if (description === "") {
@@ -20,22 +23,15 @@ function NewNote({setNotes, updateNoteToDB }) {
         description: description,
       };
       setNotes((prev) => {
-        const prevNotes = [...prev];
-        prevNotes.push(newPost);
+        const prevNotes = [newPost, ...prev];
+        // prevNotes.push(newPost);
         return prevNotes;
       });
       updateNoteToDB(noteId, title, description);
-      
+
       setTitle("");
       setDescription("");
-      
-      
     }
-  };
-  const addNewPost = (e) => {
-    e.preventDefault();
-    const noteId = uuid();
-    updateNotes(noteId, title, description);
     // console.log(noteId, title, description);
   };
   return (
