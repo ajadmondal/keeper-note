@@ -4,13 +4,16 @@ import { MdWarning } from "react-icons/md";
 import "./styles/ZoomModal.css";
 
 function RemoveModal(props) {
+  
+  // close modal ----------------------------
   const close = () => {
-    props.setRemove(!props.remove);
+    props.setRemove(prev => !prev);
   };
-    const deleteThisNote = () => {
-        close();
-        props.delteNoteFromDB(props.noteId);
-        
+
+  //delete the note from database----------------
+  const deleteThisNote = () => {
+    props.delteNoteFromDB(props.noteId);
+    close();
   }
   if (!props.remove) return null;
 
