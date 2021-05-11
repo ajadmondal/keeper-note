@@ -1,7 +1,7 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import { MdWarning } from "react-icons/md";
-import "./styles/ZoomModal.css";
+import "./styles/Modal.css";
 
 function RemoveModal(props) {
   

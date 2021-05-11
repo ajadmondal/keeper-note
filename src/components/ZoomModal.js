@@ -1,7 +1,7 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import { ImCross } from "react-icons/im";
-import './styles/ZoomModal.css';
+import './styles/Modal.css';
 
 function ZoomModal(props) {
     const close = () => {

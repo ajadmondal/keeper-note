@@ -2,7 +2,7 @@ import React from "react";
 import ReactDOM from "react-dom";
 import { ImCross } from "react-icons/im";
 import { MdLibraryAdd } from "react-icons/md";
-import "./styles/ZoomModal.css";
+import "./styles/Modal.css";
 import "./styles/NewNote.css";
 
 function EditModal(props) {
