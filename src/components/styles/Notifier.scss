@@ -1,0 +1,41 @@
+.notifier{
+    color: white;
+    font-weight: 700;
+    padding: 3px 15px;
+    align-self: center;
+    justify-self: center;
+    position: fixed;
+    bottom: 100px;
+    border-style: solid;
+    border-radius: 5px;
+    border-color: rgb(80, 196, 76);
+    background-color: rgb(80, 196, 76);
+    box-shadow: 0px 5px 30px rgb(49, 134, 46);
+    border-width: 5px;
+    transform: translateY(400%);
+    animation: animate 3s ease 0s;
+    display: block;
+    z-index: 1000;
+}
+@keyframes animate {
+    0%{
+        opacity: 0.3;
+        transform: translateY(100%);
+    }
+    10%{
+        opacity: 1;
+        transform: translateY(0);
+    }
+    95%{
+        opacity: 1;
+        transform: translateY(0);
+    }
+    100%{
+        opacity: 0;
+        transform: translateY(30%);
+    }
+    // 100%{
+    //     // opacity: 0;
+    //     // display: none;
+    // }
+}
