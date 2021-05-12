@@ -2,12 +2,14 @@ import React, {useState, useEffect} from 'react';
 import Header from "./components/Header";
 import NewNote from "./components/NewNote";
 import Note from "./components/Note";
+import Notifier from "./components/Notifier";
 import { auth, db } from './firebase';
 import './App.css';
 
 function App() {
   const [user, setUser] = useState();
   const [notes, setNotes] = useState([]);
+  const [showNotifier, setShowNotifier] = useState(0);
 
   //update notes to db---------------------------------
   const updateNoteToDB = (noteId, title, description) => {
@@ -24,10 +26,12 @@ function App() {
           description: description,
         })
         .then(() => {
+          setShowNotifier((prev) => prev + 1);
           console.log("Document successfully updated!");
         })
         .catch((error) => {
           // The document probably doesn't exist.
+          setShowNotifier((prev) => prev - 1);
           console.error("Error updating document: ", error);
         });
     }
@@ -67,9 +71,11 @@ function App() {
         .doc(noteId)
         .delete()
         .then(() => {
+          setShowNotifier((prev) => prev + 1);
           console.log("Document successfully deleted!");
         })
         .catch((error) => {
+          setShowNotifier((prev) => prev - 1);
           // The document probably doesn't exist.
           console.error("Error Deleting document: ", error);
         });
@@ -94,6 +100,15 @@ function App() {
 
   return (
     <div className="App">
+      {/* <button onClick={() => setShowNotifier((prev) => prev + 1)}>
+        showNotifier
+      </button> */}
+      {
+        showNotifier ? <Notifier showNotifier={showNotifier} setShowNotifier={setShowNotifier} />
+          :
+          null
+      }
+      
       <Header user={user} setUser={setUser} />
       <div className="body">
         <NewNote setNotes={setNotes} updateNoteToDB={updateNoteToDB} />
