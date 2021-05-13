@@ -4,7 +4,7 @@ import { v4 as uuid } from "uuid";
 import { RiAddCircleFill } from "react-icons/ri";
 
 
-function NewNote({setNotes, updateNoteToDB }) {
+function NewNote({ setNotes, updateNoteToDB, setShowNotifier, setNotifierComment }) {
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
 
@@ -13,9 +13,11 @@ function NewNote({setNotes, updateNoteToDB }) {
     e.preventDefault();
     const noteId = uuid();
     if (title === "") {
-      alert("Note title cannot be empty.");
+      setNotifierComment("Note title cannot be empty.");
+      setShowNotifier((prev) => 0 - 1);
     } else if (description === "") {
-      alert("Note description cannot be empty.");
+      setNotifierComment("Note description cannot be empty.");
+      setShowNotifier((prev) => 0 - 1);
     } else {
       const newPost = {
         noteId: noteId,
