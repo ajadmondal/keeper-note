@@ -10,11 +10,13 @@ function App() {
   const [user, setUser] = useState();
   const [notes, setNotes] = useState([]);
   const [showNotifier, setShowNotifier] = useState(0);
+  const [notifierComment, setNotifierComment] = useState("");
 
   //update notes to db---------------------------------
   const updateNoteToDB = (noteId, title, description) => {
     if (!user) {
-      alert("Please Log In with google to Save your notes.");
+      setNotifierComment("Please Sign In with Google to Save your notes.");
+      setShowNotifier(()=> 0-1);
     } else {
       db.collection("users")
         .doc(user.uid)
@@ -26,13 +28,15 @@ function App() {
           description: description,
         })
         .then(() => {
-          setShowNotifier((prev) => prev + 1);
-          console.log("Document successfully updated!");
+          setNotifierComment("Notes successfully Updated!");
+          setShowNotifier((prev) => 1);
+          
         })
         .catch((error) => {
           // The document probably doesn't exist.
-          setShowNotifier((prev) => prev - 1);
-          console.error("Error updating document: ", error);
+          setNotifierComment(error.message);
+          setShowNotifier((prev) => 0 - 1);
+          
         });
     }
   };
@@ -54,7 +58,8 @@ function App() {
         // console.log(notes);
       })
       .catch((error) => {
-        alert("Error getting document:", error, "Please Refresh the page.");
+        setNotifierComment(error.message);
+        setShowNotifier((prev) => 0 - 1);
       });
   };
 
@@ -63,7 +68,9 @@ function App() {
     const newNotes = notes.filter(note => note.noteId !== noteId);
     setNotes(newNotes);
     if (!user) {
-      alert("Please Log In with google to Save and Delete your notes.");
+      setNotifierComment("Please Sign In with Google to Save your notes.");
+      setShowNotifier((prev) => 0 - 1);
+      // alert("Please Log In with google to Save and Delete your notes.");
     } else {
       db.collection("users")
         .doc(user.uid)
@@ -71,13 +78,12 @@ function App() {
         .doc(noteId)
         .delete()
         .then(() => {
-          setShowNotifier((prev) => prev + 1);
-          console.log("Document successfully deleted!");
+          setNotifierComment("Note successfully Deleted!");
+          setShowNotifier((prev) =>  1);
         })
         .catch((error) => {
-          setShowNotifier((prev) => prev - 1);
-          // The document probably doesn't exist.
-          console.error("Error Deleting document: ", error);
+          setNotifierComment(error.message);
+          setShowNotifier((prev) => 0 - 1);
         });
     }
   }
@@ -103,15 +109,28 @@ function App() {
       {/* <button onClick={() => setShowNotifier((prev) => prev + 1)}>
         showNotifier
       </button> */}
-      {
-        showNotifier ? <Notifier showNotifier={showNotifier} setShowNotifier={setShowNotifier} />
-          :
-          null
-      }
-      
-      <Header user={user} setUser={setUser} />
+      {showNotifier ? (
+        <Notifier
+          notifierComment={notifierComment}
+          setNotifierComment={setNotifierComment}
+          showNotifier={showNotifier}
+          setShowNotifier={setShowNotifier}
+        />
+      ) : null}
+
+      <Header
+        user={user}
+        setUser={setUser}
+        setNotifierComment={setNotifierComment}
+        setShowNotifier={setShowNotifier}
+      />
       <div className="body">
-        <NewNote setNotes={setNotes} updateNoteToDB={updateNoteToDB} />
+        <NewNote
+          setNotes={setNotes}
+          updateNoteToDB={updateNoteToDB}
+          setNotifierComment={setNotifierComment}
+          setShowNotifier={setShowNotifier}
+        />
 
         <div className="notes">
           {notes.map((note) => (
