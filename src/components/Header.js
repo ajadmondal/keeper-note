@@ -34,17 +34,27 @@ function Header(props) {
     !user
       ? auth
           .signInWithPopup(provider)
-          .then(() => {
+        .then(() => {
+            props.setNotifierComment("Successfully Signed In!");
+            props.setShowNotifier((prev) =>  1);
             // console.log("Loged In");
           })
-          .catch((error) => alert(error.message))
+        .catch((error) => {
+          props.setNotifierComment(error.message);
+          props.setShowNotifier((prev) => 0 - 1);
+        })
       : auth
           .signOut()
           .then(() => {
             setUser(null);
+            props.setNotifierComment("Successfully Signed Out!");
+            props.setShowNotifier((prev) => 1);
             // console.log("Loged Out");
           })
-          .catch((error) => alert(error.message));
+          .catch((error) => {
+            props.setNotifierComment(error.message);
+            props.setShowNotifier((prev) => 0 - 1);
+          });
   };
 
   
