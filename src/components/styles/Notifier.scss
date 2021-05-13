@@ -1,21 +1,44 @@
 .notifier{
     color: white;
     font-weight: 700;
-    padding: 3px 15px;
+    margin: 0;
+    padding: 0px;
     align-self: center;
     justify-self: center;
     position: fixed;
     bottom: 100px;
+    width: 400px;
+    min-width: 20vw;
+    max-width: 75vw;
+    
     border-style: solid;
     border-radius: 5px;
+    border-width: 5px;
+
+    transform: translateY(400%);
+    animation: animate 2.5s ease 0s;
+
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    // align-items: center;
+    z-index: 1000;
+}
+.notifier__icon{
+    align-self: center;
+    font-size: 35px;
+    color: white;
+    margin-right: 7px;
+}
+.success{
     border-color: rgb(80, 196, 76);
     background-color: rgb(80, 196, 76);
     box-shadow: 0px 5px 30px rgb(49, 134, 46);
-    border-width: 5px;
-    transform: translateY(400%);
-    animation: animate 3s ease 0s;
-    display: block;
-    z-index: 1000;
+}
+.error{
+    border-color: rgb(233, 73, 62);
+    background-color: rgb(233, 73, 62);
+    box-shadow: 0px 5px 30px rgb(233, 73, 62);
 }
 @keyframes animate {
     0%{
